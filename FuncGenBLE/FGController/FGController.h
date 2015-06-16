@@ -167,17 +167,17 @@ typedef struct {
 - (void)forceDisconnect;
 - (BOOL)isConnected;
 
-- (void)setWaveForm:(double *)waveBuffer;
-- (double *)getWaveForm;
+//- (void)setWaveForm:(double *)waveBuffer;
+//- (double *)getWaveForm;
 
-- (void)beginCommand:(enumFGCommand)fgCommand;
-- (void)endCommand:(enumFGCommand)fgCommand;
+- (void)beginCommand;
+- (void)endCommand;
 
 - (void)setDevice:(int)deviceId;
 - (void)setOutput:(BOOL)using;
 
 - (void)transferWaveBuffer;
-- (void)setFrequencey:(UInt32)freq;
+- (void)setFrequencey:(uint32_t)freq;
 - (void)reset;
 
 - (int)getDevice;

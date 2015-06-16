@@ -33,8 +33,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 - (IBAction)moreInformationButton:(id)sender {
-	
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:MBED_PAGE_URL]];
 }
 

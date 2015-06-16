@@ -92,12 +92,16 @@ extern double	gWaveBuffer[WAVE_BUFFER_SIZE];		// -1〜1
 }
 
 //------------------------------------------------------------------------------------------
-// for BLEPeripheralAccessDelegate
+#pragma mark - for BLEPeripheralAccessDelegate
 - (void)didFindCharacteristic:(CBCharacteristic *)characteristic c_uuid:(NSString *)c_uuid;
 {
 	[_characteristicDic setObject:characteristic forKey:c_uuid];
-	
 	NSLog(@"didFindCharacteristic : %@", c_uuid);
+}
+
+- (void)didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
+{
+	
 }
 
 //------------------------------------------------------------------------------------------

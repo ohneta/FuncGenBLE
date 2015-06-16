@@ -23,7 +23,7 @@
 	if (self) {
 		//waveformRect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 		
-		viewMode = 0;
+		waveFormViewMode = WaveFormViewMode_WaveEdit;
 		self.userInteractionEnabled = YES;
 
 		// 一本指のダブルタップジェスチャを有効にする
@@ -67,9 +67,9 @@
 	CGContextRef context = UIGraphicsGetCurrentContext();
 
 	CGRect drawRect = CGRectMake(rect.origin.x, rect.origin.y,rect.size.width, rect.size.height);
-	if (viewMode == 0) {
+	if (waveFormViewMode == WaveFormViewMode_WaveEdit) {
 		CGContextSetRGBFillColor(context, 0.0f, 0.0f, 0.0f, 0.0f);
-	} else if (viewMode == 1) {
+	} else if (waveFormViewMode == WaveFormViewMode_FrequencyEdit) {
 		CGContextSetRGBFillColor(context, 0.4f, 0.4f, 0.7f, 0.7f);
 	}
 	CGContextFillRect(context, drawRect);
@@ -127,7 +127,7 @@
  */
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	if (viewMode != 0) {
+	if (waveFormViewMode != WaveFormViewMode_WaveEdit) {
 		return;
 	}
 
@@ -148,7 +148,7 @@ NSLog(@"touchesBegan: x:%d y:%f", one.x, one.y);
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	if (viewMode != 0) {
+	if (waveFormViewMode != WaveFormViewMode_WaveEdit) {
 		return;
 	}
 
@@ -211,22 +211,6 @@ NSLog(@"touchesBegan: x:%d y:%f", one.x, one.y);
 
 - (BOOL)bufferPointFromViewPoint:(CGPoint)point bufferPoint:(WaveBufferOne *)bufferPoint
 {
-#if 0
-	if ((point.x < waveformRect.origin.x) ||
-		(waveformRect.origin.x + waveformRect.size.width < point.x)	) {
-		return NO;
-	}
-	if ((point.y < waveformRect.origin.y) ||
-		(waveformRect.origin.y + waveformRect.size.height < point.y)	) {
-		return NO;
-	}
-	
-	int x = (point.x - waveformRect.origin.x) * (waveformRect.size.width / WAVE_BUFFER_SIZE);
-	double y = ((point.y - waveformRect.origin.y) / waveformRect.size.height) * -2.0 + 1.0;
-
-	bufferPoint->x = x;
-	bufferPoint->y = y;
-#else
 	if ((point.x < self.frame.origin.x) ||
 		(self.frame.origin.x + self.frame.size.width < point.x)	) {
 		return NO;
@@ -241,7 +225,6 @@ NSLog(@"touchesBegan: x:%d y:%f", one.x, one.y);
 
 	bufferPoint->x = x;
 	bufferPoint->y = y;
-#endif
 
 	return YES;
 }
@@ -256,70 +239,25 @@ NSLog(@"touchesBegan: x:%d y:%f", one.x, one.y);
 	panGesture.minimumNumberOfTouches = 1;
 	panGesture.maximumNumberOfTouches = 1;
 	[self addGestureRecognizer:panGesture];
-	
-/*
-	pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
-	[self addGestureRecognizer:pinchGesture];
-*/
-/*
-	// swips
-	swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRightGesture:)];
-	swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
-	swipeRightGesture.numberOfTouchesRequired = 2;
-	[self addGestureRecognizer:swipeRightGesture];
-	
-	swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeftGesture:)];
-	swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-	swipeLeftGesture.numberOfTouchesRequired = 2;
-	[self addGestureRecognizer:swipeLeftGesture];
-
-	swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUpGesture:)];
-	swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-	swipeUpGesture.numberOfTouchesRequired = 2;
-	[self addGestureRecognizer:swipeUpGesture];
-	
-	swipeDownGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDownGesture:)];
-	swipeDownGesture.direction = UISwipeGestureRecognizerDirectionDown;
-	swipeDownGesture.numberOfTouchesRequired = 2;
-	[self addGestureRecognizer:swipeDownGesture];
-*/
-/*
-	rotateGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGesture:)];
-	[self addGestureRecognizer:rotateGesture];
-	
-	longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-	[self addGestureRecognizer:longPressGesture];
-*/
 }
 
 - (void)unuseFrequencyGestureRecognizers
 {
-//	[self removeGestureRecognizer:singleFingerDoubleTapGesture];
 	[self removeGestureRecognizer:panGesture];
-/*
-	[self removeGestureRecognizer:pinchGesture];
-*/
-/*
-	[self removeGestureRecognizer:swipeRightGesture];
-	[self removeGestureRecognizer:swipeLeftGesture];
-	[self removeGestureRecognizer:swipeUpGesture];
-	[self removeGestureRecognizer:swipeDownGesture];
-*/
-/*
-	[self removeGestureRecognizer:rotateGesture];
-	[self removeGestureRecognizer:longPressGesture];
-*/
 }
 
 - (void)handleSingleDoubleTap:(id)sender
 {
 	NSLog(@"double tap.");
 	
-	if (viewMode == 0) {
-		viewMode = 1;		// 周波数設定モードに入る
+	if (waveFormViewMode == WaveFormViewMode_WaveEdit) {
+		// 周波数設定モードに入る
+		waveFormViewMode = WaveFormViewMode_FrequencyEdit;
 		[self useFrequencyGestureRecognizers];
-	} else if (viewMode == 1) {
-		viewMode = 0;		// 波形設定モードに入る
+
+	} else if (waveFormViewMode == WaveFormViewMode_FrequencyEdit) {
+		// 波形設定モードに入る
+		waveFormViewMode = WaveFormViewMode_WaveEdit;
 		[self unuseFrequencyGestureRecognizers];
 	}
 
@@ -330,10 +268,9 @@ NSLog(@"touchesBegan: x:%d y:%f", one.x, one.y);
 {
 	UIPanGestureRecognizer *pan = (UIPanGestureRecognizer*)sender;
 	CGPoint point = [pan translationInView:self];
-	CGPoint velocity = [pan velocityInView:self];
-	//NSLog(@"pan. state: %d, translation: %@, velocity: %@", ((UIPanGestureRecognizer *)sender).state, NSStringFromCGPoint(point), NSStringFromCGPoint(velocity));
-	
-	static uint32_t frequency = 440;
+	//CGPoint velocity = [pan velocityInView:self];
+
+	static uint32_t frequency = 440;	// TODO: !!
 	static CGPoint beginPoint;
 	if (pan.state == UIGestureRecognizerStateBegan) {
 		if ([_delegate respondsToSelector:@selector(requestFrequencyValue)]) {
@@ -350,7 +287,6 @@ NSLog(@"touchesBegan: x:%d y:%f", one.x, one.y);
 			hzF2 = (int)point.x;
 		}
 		int hzF = hzF1 * -100 + hzF2;
-		//NSLog(@"hzF:%d = (hzF1:%d, hzF2:%d)", hzF, hzF1, hzF2);
 
 		if (pan.state == UIGestureRecognizerStateChanged) {
 			if ([_delegate respondsToSelector:@selector(changeFrequencyValue:)]) {
@@ -365,46 +301,4 @@ NSLog(@"touchesBegan: x:%d y:%f", one.x, one.y);
 
 }
 
-/*
-- (void)handlePinchGesture:(id)sender
-{
-	UIPinchGestureRecognizer *pinch = (UIPinchGestureRecognizer*)sender;
-	CGFloat scale = [pinch scale];
-	CGFloat velocity = [pinch velocity];
-	NSLog(@"pinch. scale: %f, velocity: %f", scale, velocity);
-}
-
-- (void)handleSwipeRightGesture:(id)sender
-{
-	NSLog(@"swipe-right");
-}
-- (void)handleSwipeLeftGesture:(id)sender
-{
-	NSLog(@"swipe-left");
-}
-
-- (void)handleSwipeUpGesture:(id)sender
-{
-	NSLog(@"swipe-up");
-}
-- (void)handleSwipeDownGesture:(id)sender
-{
-	NSLog(@"swipe-down");
-}
-
-- (void)handleRotateGesture:(id)sender
-{
-	UIRotationGestureRecognizer *rotate = (UIRotationGestureRecognizer*)sender;
-	CGFloat rotation = [rotate rotation];
-	CGFloat velocity = [rotate velocity];
-	NSLog(@"rotate. rotation: %f, velocity: %f", rotation, velocity);
-}
-
-- (void)handleLongPressGesture:(id)sender
-{
-	NSLog(@"Long press.");
-	//viewMode = 1;
-	//[self setNeedsDisplay];
-}
-*/
 @end

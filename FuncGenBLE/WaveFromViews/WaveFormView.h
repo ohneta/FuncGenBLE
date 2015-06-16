@@ -26,30 +26,30 @@ typedef struct {
 	double	y;		// 範囲 : -1〜1
 } WaveBufferOne;
 
+typedef enum {
+	WaveFormViewMode_WaveEdit = 0,		// 波形設定モード
+	WaveFormViewMode_FrequencyEdit,		// 周波数設定モード
+	
+} enumWaveFormViewMode;
+
+
 @interface WaveFormView : UIView
 {
 	CGPoint			lastTouchPoint;
 	WaveBufferOne	lastOne;
 	
-	int		viewMode;
+	enumWaveFormViewMode	waveFormViewMode;
 	
 	
 	UITapGestureRecognizer			*singleFingerDoubleTapGesture;
 	UIPanGestureRecognizer			*panGesture;
-	UIPinchGestureRecognizer		*pinchGesture;
-	UISwipeGestureRecognizer		*swipeRightGesture;
-	UISwipeGestureRecognizer		*swipeLeftGesture;
-	UISwipeGestureRecognizer		*swipeUpGesture;
-	UISwipeGestureRecognizer		*swipeDownGesture;
-	UIRotationGestureRecognizer		*rotateGesture;
-	UILongPressGestureRecognizer	*longPressGesture;
 }
+
 @property (nonatomic)	double *waveBuffer;
 
 - (void)setWaveBuffer:(double *)buffer;
 - (double *)getWaveBuffer;
 - (void)setWaveFormRect:(CGRect)rect;
-
 
 
 @property (nonatomic, assign) id<WaveFormViewFrequencyDelegate> delegate;

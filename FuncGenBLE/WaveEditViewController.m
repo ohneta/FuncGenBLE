@@ -16,8 +16,7 @@ double	gWaveBuffer[WAVE_BUFFER_SIZE];		// val=-1〜1
 
 
 @interface WaveEditViewController () <UIScrollViewDelegate, FGControllerDelegate, WaveFormViewFrequencyDelegate>
-	//<UIPickerViewDelegate, UIPickerViewDataSource, BLEAdvertisingDelegate, BLEPeripheralAccessDelegate>
-//
+
 @property (weak, nonatomic) IBOutlet UIButton *waveSineButton;
 @property (weak, nonatomic) IBOutlet UIButton *waveSquareButton;
 @property (weak, nonatomic) IBOutlet UIButton *waveTriangleButton;
@@ -25,7 +24,6 @@ double	gWaveBuffer[WAVE_BUFFER_SIZE];		// val=-1〜1
 @property (weak, nonatomic) IBOutlet UIButton *waveFreehandButton;
 //
 @property (weak, nonatomic) IBOutlet UIView *waveScreenParentView;	// waveformの親view
-//@property (weak, nonatomic) IBOutlet UISlider *waveScaleSlider;
 
 //
 @property (weak, nonatomic) IBOutlet UIButton *connectButton;
@@ -205,6 +203,16 @@ double	gWaveBuffer[WAVE_BUFFER_SIZE];		// val=-1〜1
 		_frequencyUpButton.enabled = NO;
 		_frequencyDownButton.enabled = NO;
 	}
+}
+
+- (void)didFGBeginCommandSend
+{
+	
+}
+
+- (void)didFGEndCommandSend
+{
+	
 }
 
 //----------------------------------------------------------------

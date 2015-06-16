@@ -11,7 +11,6 @@
 
 @class WaveScreenView;
 @class WaveFormView;
-@class FrequencyTunePickerView;
 
 //----------------------------------------------------------------
 
@@ -19,8 +18,6 @@
 {
 	FGController	*fgController;
 
-	FrequencyTunePickerView		*frequencyTunePickerView;
-	
 	CGRect		waveformScrollRect;
 	CGRect		waveformRect;
 

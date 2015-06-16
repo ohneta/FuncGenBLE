@@ -18,13 +18,8 @@
 	WaveKind	waveKind;
 }
 
-//@property (nonatomic, assign, setter=setWaveFormRect:)	CGRect	waveFormRect;
 @property (nonatomic, assign)	CGRect	waveFormRect;
 @property (nonatomic, assign)	int32_t	frequency;
-
-
-- (void)setWaveKind:(WaveKind)waveKind;
-- (WaveKind)getWaveKind;
 
 
 @end

@@ -54,7 +54,7 @@
 - (BOOL)scanStart
 {
 	_isScanning = YES;
-	NSLog(@"scanStart _centralManager:state %d", [_centralManager state]);
+	NSLog(@"scanStart _centralManager:state %d", (int32_t)[_centralManager state]);
 
 	if ([_centralManager state] != CBCentralManagerStatePoweredOn)
 		return NO;
