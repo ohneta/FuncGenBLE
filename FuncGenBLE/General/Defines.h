@@ -9,6 +9,12 @@
 #ifndef FunctionGenBLE_Defines_h
 #define FunctionGenBLE_Defines_h
 
+//---------------------------------------------------------
+// BLE service info.
+#define	BLE_MY_SERVICE_UUID		@"FFFF"
+#define	BLE_MY_SERVICE_NAME		@"mbedFuncGen 0.01"
+
+//---------------------------------------------------------
 
 typedef enum WaveKind {
 	WaveKind_None = 0,
@@ -19,5 +25,6 @@ typedef enum WaveKind {
 	WaveKind_Freehand,
 } WaveKind;
 
+//---------------------------------------------------------
 
 #endif

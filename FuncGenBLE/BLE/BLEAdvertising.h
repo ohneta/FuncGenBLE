@@ -5,7 +5,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#import "Defines.h"
 #import "BLEPeripheralAccess.h"
+
 
 //---------------------------------------------------------
 

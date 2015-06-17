@@ -97,13 +97,12 @@
 {
 	NSArray *serviceUUIDs = [advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"];	// UUIDの一覧取得
 	NSLog(@"serviceUUIDs: %@", serviceUUIDs.description);
-
-	NSString *my_service_uuid = @"FFFF";	// for DEBUG SERVICE UUID
-	if ([serviceUUIDs containsObject:[CBUUID UUIDWithString:my_service_uuid]]) {
-		// 対象とするサービスが含まれている!!
-
-		// ペリフェラルに接続を試みる
-		{
+	NSLog(@"Discovered %@", peripheral.name);
+	
+	if ([serviceUUIDs containsObject:[CBUUID UUIDWithString:BLE_MY_SERVICE_UUID]]) {
+		// 対象とするサービスUUIDが含まれている
+		if ([peripheral.name compare:BLE_MY_SERVICE_NAME] == NSOrderedSame) {
+			// 対象とするサービス名である
 			[_peripherals addObject:peripheral];
 			[_centralManager connectPeripheral:peripheral options:nil];	// 接続try
 		}

@@ -122,7 +122,7 @@
 			}
 			int oneWidth = (int)((double)WAVE_BUFFER_SIZE / 10.0) / ((double)_frequency / divVal);
 			
-			NSLog(@"freq:%d, divVal:%f,  oneWidth: %d", _frequency, divVal, oneWidth);
+			//NSLog(@"freq:%d, divVal:%f,  oneWidth: %d", _frequency, divVal, oneWidth);
 			if (oneWidth > 2) {
 				for (int x = 0; x <= WAVE_BUFFER_SIZE; x += oneWidth) {
 			 		CGContextMoveToPoint(context,    [self changeX:x], [self changeY:1]);

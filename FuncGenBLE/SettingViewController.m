@@ -10,6 +10,11 @@
 
 @interface SettingViewController ()
 
+@property (weak, nonatomic) IBOutlet UISwitch *transferWaveformBeforeOutputOffButton;
+@property (weak, nonatomic) IBOutlet UISwitch *transferWaveformAfterOutputOnButton;
+@property (weak, nonatomic) IBOutlet UISwitch *transferWaveformWithFrequencyButton;
+
+@property (weak, nonatomic) IBOutlet UISwitch *frequencyWithPanGestureButton;
 @end
 
 @implementation SettingViewController
@@ -39,5 +44,16 @@
 /**
  */
 
+- (IBAction)transferWaveformBeforeOutputOffButtonHandle:(id)sender {
+}
+
+- (IBAction)transferWaveformAfterOutputOnButtonHandle:(id)sender {
+}
+
+- (IBAction)transferWaveformWithFrequencyButtonHandle:(id)sender {
+}
+
+- (IBAction)frequencyWithPanGestureButtonHandle:(id)sender {
+}
 
 @end

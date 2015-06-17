@@ -144,15 +144,27 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jTi-Cu-r4F">
                                 <rect key="frame" x="410" y="48" width="51" height="31"/>
+                                <connections>
+                                    <action selector="transferWaveformBeforeOutputOffButtonHandle:" destination="hP3-9B-PVP" eventType="valueChanged" id="xRp-Lc-Bie"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fyh-oP-X4t">
                                 <rect key="frame" x="410" y="87" width="51" height="31"/>
+                                <connections>
+                                    <action selector="transferWaveformAfterOutputOnButtonHandle:" destination="hP3-9B-PVP" eventType="valueChanged" id="j3Y-nv-MSJ"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfz-sy-jdL">
                                 <rect key="frame" x="410" y="126" width="51" height="31"/>
+                                <connections>
+                                    <action selector="transferWaveformWithFrequencyButtonHandle:" destination="hP3-9B-PVP" eventType="valueChanged" id="HdG-x1-r8j"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eir-2H-TDt">
                                 <rect key="frame" x="410" y="188" width="51" height="31"/>
+                                <connections>
+                                    <action selector="frequencyWithPanGestureButtonHandle:" destination="hP3-9B-PVP" eventType="valueChanged" id="elc-up-DOH"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="注意！！まだ動きません！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kB-l3-IM1">
                                 <rect key="frame" x="91" y="256" width="399" height="28"/>
@@ -166,6 +178,12 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="frequencyWithPanGestureButton" destination="eir-2H-TDt" id="dWM-AM-lSL"/>
+                        <outlet property="transferWaveformAfterOutputOnButton" destination="fyh-oP-X4t" id="oqC-Cx-eDL"/>
+                        <outlet property="transferWaveformBeforeOutputOffButton" destination="jTi-Cu-r4F" id="YdJ-08-YfO"/>
+                        <outlet property="transferWaveformWithFrequencyButton" destination="pfz-sy-jdL" id="swj-cO-sCt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkY-FW-KGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -434,6 +452,6 @@
         <image name="wave_tri.png" width="242" height="134"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WIr-Qt-lEt"/>
+        <segue reference="ycF-UE-4YB"/>
     </inferredMetricsTieBreakers>
 </document>
